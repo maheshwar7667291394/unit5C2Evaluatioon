@@ -18,21 +18,17 @@ public class Main {
 		student.add(new Student("5", "hiralal", 500, "patna"));
 		
 	
+		Stream<Student> str1=student.stream();
 		
-		Collection<Employee> emp=student.stream()
-				                .filter(s->s.getMarks()>500)
-				                .map(k->{
-				                	String id=k.getRoll();
-//				                	 int id=k.getRoll();
-				                	 String name=k.getName();
-				                	 int salary=k.getMarks()*10000;
-				                	 String address=k.getAddress();
-				                	
-				                	 emp.add(new Employee(id, name, salary, address));
-				                	 return emp;
-				                	 
-				                	 
-				                }).collect(Collections.tolist());
+		List<Employee> emp=str1.filter(f->f.getMarks()>400)
+				.map(m->{
+					
+					Employee emp1=new Employee(m.getRoll(), m.getName(),m.getMarks()*10000, m.getAddress());
+					return emp1;
+				}).collect(Collectors.toList());
+		for(Employee item:emp) {
+			System.out.println(item);
+		}
 	}
 
 }
